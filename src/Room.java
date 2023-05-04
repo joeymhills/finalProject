@@ -43,7 +43,7 @@ public class Room {
 
 	   /**
 	    * getter method. Returns number
-	    * @return int
+	    * @return integer
 	    */
 
 	public int getNumber() {
@@ -97,3 +97,64 @@ public class Room {
 	}
 	
 }
+
+
+
+class RoomWithMachinePart extends Room {
+
+	private Part machinePart;
+	
+	public RoomWithMachinePart(int number, Part part) {
+		super(number);
+		this.machinePart = part;
+	}
+	
+	public Part getMachinePart() {
+		return machinePart;
+	}
+	
+	public Part collectPart(Player player) {
+		//if (machinePart.isNext(player.lastMachinePartCollected) = true) {
+			return machinePart;
+		// else {
+		//	return null;
+		//}
+	}
+	
+	@Override
+	public boolean hasPart () {
+		return true;
+	}
+	
+}
+
+
+
+class RoomWithTools extends Room {
+
+	public RoomWithTools(int number) {
+		super(number);
+	}
+	
+	@Override
+	public boolean hasTools () {
+		return true;
+	}
+	
+}
+
+
+
+class Workshop extends Room {
+
+	public Workshop(int number) {
+		super(number);
+	}
+	
+	@Override
+	public boolean isWorkshop () {
+		return true;
+	}
+	
+}
+
