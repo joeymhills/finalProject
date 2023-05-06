@@ -5,47 +5,28 @@
  * @author Mustafa
  * */
 
- public class Part {
+public class Part {
 	
-	private int partnumber; //self explanatory
-	public static final int LAST_PART = 6; //^ again 
+	private int partnumber;
+	public static final int LAST_PART = 6;
 	
 	
 	public Part(int number ) {
 		this.partnumber = number;
 	}
 	
-	/**
-	 * Returns the part number 
-	 * 
-	 * @return int, part number
-	 */
 	public int getPartNumber() {
 		return this.partnumber;
 	}
 	
-	/**
-	 * Checks a part to see if is the last part 
-	 * the last part should be part 6.
-	 * 
-	 * @return boolean True if last part, false if not last part
-	 */
-	public boolean isLastPart() {
+	public boolean isLastPart(Part part) {
 		if (LAST_PART == partnumber) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-	/**
-	 *Compares the current part with another part found in game, 
-	 *checks if that part is consecutive to the last 
-	 * 
-	 * @param part Part object collected in-game
-	 * @return true if the part is consecutive, false if not. 
-	 * 
-	 */
-	public boolean isNext(Part part) {
+	public boolean isNext(Part part ) {
 		if (this.partnumber + 1 == part.partnumber ) {
 			return true;
 		} else {
