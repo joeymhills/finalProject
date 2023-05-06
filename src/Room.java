@@ -104,26 +104,35 @@ class RoomWithMachinePart extends Room {
 
 	private Part machinePart;
 	
+	
 	public RoomWithMachinePart(int number, Part part) {
 		super(number);
 		this.machinePart = part;
 	}
 	
+	
 	public Part getMachinePart() {
 		return machinePart;
 	}
 	
+	
 	public Part collectPart(Player player) {
-		//if (machinePart.isNext(player.lastMachinePartCollected) = true) {
+		if (machinePart.isNext(player.getLastMachinePartCollected())) {
 			return machinePart;
-		// else {
-		//	return null;
-		//}
+		} else {
+			return null;
+		}
 	}
 	
 	@Override
 	public boolean hasPart () {
 		return true;
+	}
+	
+ @Override
+	public String helpMessage() {
+		return "you are in room ";
+		
 	}
 	
 }

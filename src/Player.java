@@ -3,7 +3,7 @@
  * Represents a player in the game
  * */
 
-public class Player {
+ public class Player {
 	
 	private int playerNumber;
 	private Room currentRoom;
@@ -27,14 +27,31 @@ public class Player {
 		return toolsCollected;
 	}
 	
-	public String move (Direction dir) {
-		return "";
+	/**
+	 * Moves the character in a direction. takes in a integer  
+	 * 
+	 * @param int direction
+	 * @return if there is a door, returns error message, if there is a door
+	 * 			it will change 'currentRoom' and print the room message.
+	 * @author mustafabolat
+	 */
+	public String move (int direction) {
+		if (currentRoom.getDoor(direction) == null){
+			return "There is no door in this direction";
+		} else  {
+			Room newRoom = currentRoom.getDoor(direction);
+			currentRoom = newRoom;
+			return currentRoom.printMessage();
+		}
+			
 	}
 	
+	//needs finishing
 	public String collectTools () {
 		return "";
 	}
 	
+	//needs finishing
 	public String build () {
 		return "";
 	}
