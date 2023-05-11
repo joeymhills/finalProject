@@ -1,5 +1,3 @@
-import java.util.Iterator;
-
 /**
  * This class holds the whole game and its components (the two players and 10 rooms). 
  * This class should be instantiated in the main application class 
@@ -9,7 +7,7 @@ import java.util.Iterator;
 /*
  * Game Object must be instantiated in the main application class*/
 
-public class Game {
+ public class Game {
 	private Player[] players;  //should hold two player objects
 	private Room[] rooms; 	// should hold 10 room objects 
 	private Player currentPlayer;
@@ -17,8 +15,9 @@ public class Game {
 	
 	public Game() throws Exception { //Exception for setUpDoors();
 		
-		Player[] players = new Player[1];
-		Room[] rooms = {
+		players = new Player[1];
+		rooms = new Room[]{
+				
 				new Room(1), 
 				new RoomWithMachinePart(2, new Part(3)),
 				new RoomWithMachinePart(3, new Part(1)),
@@ -29,9 +28,11 @@ public class Game {
 				new RoomWithTools(8),
 				new Room(9),
 				new Workshop(10)
+				
 				};
 		
 		setUpDoors();
+		
 		}
 	
 	
