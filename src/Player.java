@@ -1,4 +1,3 @@
-
 /*
  * Represents a player in the game
  * */
@@ -13,6 +12,7 @@
 	public Player(int playerNumber, Room startingRoom) {
 		this.setPlayerNumber(playerNumber);
 		this.currentRoom = startingRoom;
+		this.toolsCollected = false;
 	}
 	
 	public Part getLastMachinePartCollected() {
@@ -43,12 +43,32 @@
 			currentRoom = newRoom;
 			return currentRoom.printMessage();
 		}
-			
+		
 	}
 	
-	//needs finishing
-	public String collectTools () {
-		return "";
+	/**
+	 * Collects tools if the room has it.
+	 * 
+	 * @return String a string to be put in the HelpMessage text field
+	 */
+	public String collectTools() {
+		if (currentRoom.hasTools() == false) 
+			return "This room does not have tools to collect";
+		else if (toolsCollected == true ) {
+			return "You have already collected the tools";
+		} else {
+		toolsCollected = true;
+		return "Tools are now collected";
+		}
+	}
+	
+	public String collectPart() {
+		if (currentRoom.hasPart() == true && currentRoom.collectPart(this) != null) {
+			lastMachinePartCollected = currentRoom.collectPart(this);
+			return "Successfuly got the part";
+		} else {
+			return "This room doesnt have a part";
+		}
 	}
 	
 	//needs finishing

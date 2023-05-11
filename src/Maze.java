@@ -27,8 +27,8 @@ public class Maze extends Application {
 	private Button p2CollectTools;
 	private Button p2BuildMachine;
 	
-	private TextField p1HelpMessage;
-	private TextField p2HelpMessage;
+	private TextField p1TextField;
+	private TextField p2TextField;
 	
 	private Button p1ReqHelp;
 	private Button p2ReqHelp;
@@ -74,13 +74,13 @@ public class Maze extends Application {
 		p1BuildMachine = new Button("Build Machine");
 		p2BuildMachine = new Button("Build Machine");
 		
-		p1HelpMessage = new TextField();
-		p1HelpMessage.setEditable(false);
-		GridPane.setColumnSpan(p1HelpMessage, 3);
+		p1TextField = new TextField();
+		p1TextField.setEditable(false);
+		GridPane.setColumnSpan(p1TextField, 3);
 	
-		p2HelpMessage = new TextField();
-		p2HelpMessage.setEditable(false);
-		GridPane.setColumnSpan(p2HelpMessage, 3);
+		p2TextField = new TextField();
+		p2TextField.setEditable(false);
+		GridPane.setColumnSpan(p2TextField, 3);
 		
 		
 		p1ReqHelp = new Button("Help!");
@@ -89,14 +89,17 @@ public class Maze extends Application {
 		reset = new Button("Reset");
 		
 		grid.add(player1Label, 1, 0); grid.add(p1up, 1, 1); grid.add(p1right, 2, 2); grid.add(p1down, 1, 3); grid.add(p1left, 0, 2);
-		grid.add(p1CollectPart, 0, 4); grid.add(p1CollectTools, 1, 4); grid.add(p1BuildMachine, 2, 4); grid.add(p1HelpMessage, 0, 5);
+		grid.add(p1CollectPart, 0, 4); grid.add(p1CollectTools, 1, 4); grid.add(p1BuildMachine, 2, 4); grid.add(p1TextField, 0, 5);
 		grid.add(p1ReqHelp, 1, 6);
 	
 		grid.add(player2Label, 5, 0); grid.add(p2up, 5, 1); grid.add(p2right, 6, 2); grid.add(p2down, 5, 3); grid.add(p2left, 4, 2);
-		grid.add(p2CollectPart, 4, 4); grid.add(p2CollectTools, 5, 4); grid.add(p2BuildMachine, 6, 4); grid.add(p2HelpMessage, 4, 5);
+		grid.add(p2CollectPart, 4, 4); grid.add(p2CollectTools, 5, 4); grid.add(p2BuildMachine, 6, 4); grid.add(p2TextField, 4, 5);
 		grid.add(p2ReqHelp, 5, 6);
 		
 		grid.add(reset, 3, 7);
+		
+		
+		game = new Game();
 		
 		
 		/**
@@ -106,13 +109,16 @@ public class Maze extends Application {
 			
 			@Override
 			public void handle(ActionEvent event) {
-				try {
-					game.reset();
-				} catch (Exception e) {
-					System.out.println("Error in Reset handler/method");
-				}
 				
-				
+			try {
+				game.reset();
+				p1TextField.setText("Game has been reset.");
+				p2TextField.setText("Game has been reset.");
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.err.println("Error in Maze>reset");
+			}
+			
 			}
 		});
 		
@@ -123,10 +129,126 @@ public class Maze extends Application {
 		    @Override
 		    public void handle(ActionEvent event) {
 		      String str = game.getCurrentPlayer().getCurrentRoom().helpMessage();
-		      p2HelpMessage.setText(str);
+		      p1TextField.setText(str);
 		      
 		    }
 		});
+		p2ReqHelp.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override
+		    public void handle(ActionEvent event) {
+		      String str = game.getCurrentPlayer().getCurrentRoom().helpMessage(); 
+		      p2TextField.setText(str);
+		      
+		    }
+		});
+		
+		/*
+		 * UP button handlers
+		 */
+		p1up.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				p1TextField.setText(game.getCurrentPlayer().move(Direction.up));
+			}
+		});
+		
+		p2up.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				p2TextField.setText(game.getCurrentPlayer().move(Direction.up));
+			}
+		});
+		
+		/*
+		 * RIGHT button handlers
+		 */
+		p1right.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				p1TextField.setText(game.getCurrentPlayer().move(Direction.right));
+			}
+		});
+		
+		p2right.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				p2TextField.setText(game.getCurrentPlayer().move(Direction.right));
+			}
+		});
+		
+		/*
+		 * Down Button Handlers 
+		 */
+		p1down.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				p1TextField.setText(game.getCurrentPlayer().move(Direction.down));
+			}
+		});
+		p2down.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				p2TextField.setText(game.getCurrentPlayer().move(Direction.down));
+			}
+		});
+		
+		/*
+		 * Left button Handlers
+		 */
+		p1left.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				p1TextField.setText(game.getCurrentPlayer().move(Direction.left));
+			}
+		});
+		p2left.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				p2TextField.setText(game.getCurrentPlayer().move(Direction.left));
+			}
+		});
+		
+		/*
+		 * Handlers for collect tools/machine part/build machine
+		 */
+		
+		p1CollectPart.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				String methodCallandMessage = game.getCurrentPlayer().collectPart();
+				p1TextField.setText(methodCallandMessage);
+			}
+		});
+		p2CollectPart.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				String methodCallandMessage = game.getCurrentPlayer().collectPart();
+				p2TextField.setText(methodCallandMessage);
+			}
+		});
+		
+		p1CollectTools.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				p1TextField.setText(game.getCurrentPlayer().collectTools());
+			}
+		});
+		p2CollectTools.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				p2TextField.setText(game.getCurrentPlayer().collectTools());
+			}
+		});
+		
+		
+		p1BuildMachine.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				
+			}
+		});
+		
+		
 		
 		stage.setScene(scene);    // Set window's scene  
 	    stage.setTitle("Maze Game"); // Set window's title

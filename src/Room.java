@@ -96,6 +96,14 @@ public class Room {
 		return "You are in Room "+number;
 	}
 	
+	/*
+	 * will be Overrided for RoomWithMachinePart
+	 */
+	public Part collectPart(Player currentPlayer) {
+		System.err.println("THIS RETURN IS NULL. ERROR. CHECK Room.collectPart()");
+		return null;
+	}
+	
 }
 
 
@@ -115,9 +123,12 @@ class RoomWithMachinePart extends Room {
 		return machinePart;
 	}
 	
-	
+ @Override
 	public Part collectPart(Player player) {
-		if (machinePart.isNext(player.getLastMachinePartCollected())) {
+		if (machinePart.isNext(player.getLastMachinePartCollected()) == false) {
+			return null;
+		}
+		else if (machinePart.isNext(player.getLastMachinePartCollected()) == true) {
 			return machinePart;
 		} else {
 			return null;

@@ -13,10 +13,10 @@
 	private Player currentPlayer;
 
 	
-	public Game() throws Exception { //Exception for setUpDoors();
+	public Game() { //Exception for setUpDoors();
 		
 		players = new Player[1];
-		rooms = new Room[]{
+		rooms = new Room[ ]{
 				
 				new Room(1), 
 				new RoomWithMachinePart(2, new Part(3)),
@@ -31,7 +31,13 @@
 				
 				};
 		
-		setUpDoors();
+		try {
+			setUpDoors();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("Error in Game>Game()>setupdoors()");
+		}
+		InitGame();
 		
 		}
 	
@@ -61,6 +67,27 @@
 		}
 	}
 	
+	public void reset() throws Exception {
+		
+		players = new Player[1];
+		rooms = new Room[ ]{
+				
+				new Room(1), 
+				new RoomWithMachinePart(2, new Part(3)),
+				new RoomWithMachinePart(3, new Part(1)),
+				new Room(4),
+				new RoomWithMachinePart(5, new Part(2)),
+				new RoomWithMachinePart(6, new Part(4)),
+				new Room(7),
+				new RoomWithTools(8),
+				new Room(9),
+				new Workshop(10)
+				
+				};
+		
+		setUpDoors();
+		
+	}
 	
 	   /**
 	    * Assuming that Rooms has been initialized in the constructor 
@@ -103,7 +130,9 @@
 		rooms[9].setDoor(Direction.up, rooms[5]);
 		rooms[9].setDoor(Direction.left, rooms[1]);
 
-	}	
+	}
 
+	
+	
 }
 
