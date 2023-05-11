@@ -5,8 +5,10 @@ import javafx.stage.Stage;
 
 public class Maze extends Application {
 	
-	private Label player1; 
-	private Label player2; 
+	private Game game;
+	
+	private Label player1Label; 
+	private Label player2Label; 
 	
 	private Button p1up;
 	private Button p2up;
@@ -48,8 +50,8 @@ public class Maze extends Application {
 	    grid = new GridPane();  
 	    scene = new Scene(grid);
 			
-		player1 = new Label("Player 1");
-		player2 = new Label("Player 2");
+		player1Label = new Label("Player 1");
+		player2Label = new Label("Player 2");
 		
 		p1up = new Button("Up");
 		p2up = new Button("Up");
@@ -86,17 +88,45 @@ public class Maze extends Application {
 		
 		reset = new Button("Reset");
 		
-		grid.add(player1, 1, 0); grid.add(p1up, 1, 1); grid.add(p1right, 2, 2); grid.add(p1down, 1, 3); grid.add(p1left, 0, 2);
+		grid.add(player1Label, 1, 0); grid.add(p1up, 1, 1); grid.add(p1right, 2, 2); grid.add(p1down, 1, 3); grid.add(p1left, 0, 2);
 		grid.add(p1CollectPart, 0, 4); grid.add(p1CollectTools, 1, 4); grid.add(p1BuildMachine, 2, 4); grid.add(p1HelpMessage, 0, 5);
 		grid.add(p1ReqHelp, 1, 6);
 	
-		grid.add(player2, 5, 0); grid.add(p2up, 5, 1); grid.add(p2right, 6, 2); grid.add(p2down, 5, 3); grid.add(p2left, 4, 2);
+		grid.add(player2Label, 5, 0); grid.add(p2up, 5, 1); grid.add(p2right, 6, 2); grid.add(p2down, 5, 3); grid.add(p2left, 4, 2);
 		grid.add(p2CollectPart, 4, 4); grid.add(p2CollectTools, 5, 4); grid.add(p2BuildMachine, 6, 4); grid.add(p2HelpMessage, 4, 5);
 		grid.add(p2ReqHelp, 5, 6);
 		
 		grid.add(reset, 3, 7);
 		
 		
+		/**
+		 * Reset Button event Handler
+		 */
+		reset.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				try {
+					game.reset();
+				} catch (Exception e) {
+					System.out.println("Error in Reset handler/method");
+				}
+				
+				
+			}
+		});
+		
+		/**
+		 * Help Button event Handler
+		 */
+		p1ReqHelp.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override
+		    public void handle(ActionEvent event) {
+		      String str = game.getCurrentPlayer().getCurrentRoom().helpMessage();
+		      p2HelpMessage.setText(str);
+		      
+		    }
+		});
 		
 		stage.setScene(scene);    // Set window's scene  
 	    stage.setTitle("Maze Game"); // Set window's title
