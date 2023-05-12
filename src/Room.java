@@ -84,7 +84,7 @@ public class Room {
 	    */
 	
 	public String printMessage() {
-		return "Welcome to Room "+number;
+		return "Welcome to Room "+ getNumber();
 	}
 
 	   /**
@@ -93,16 +93,21 @@ public class Room {
 	    */
 
 	public String helpMessage() {
-		return "You are in Room "+number;
+		return "You are in Room "+ getNumber();
 	}
-	
+
 	/*
 	 * will be Overrided for RoomWithMachinePart
 	 */
-	public Part collectPart(Player currentPlayer) {
-		System.err.println("THIS RETURN IS NULL. ERROR. CHECK Room.collectPart()");
+	public Part collectPart(Player player) {
+		System.out.println("Wrong method called. collect part is callled in room instead of roomwithpart");
 		return null;
+		
 	}
+	
+	
+	
+	
 	
 }
 
@@ -123,16 +128,18 @@ class RoomWithMachinePart extends Room {
 		return machinePart;
 	}
 	
- @Override
+	@Override
 	public Part collectPart(Player player) {
-		if (machinePart.isNext(player.getLastMachinePartCollected()) == false) {
+		if (player.getLastMachinePartCollected() == null) {
 			return null;
 		}
-		else if (machinePart.isNext(player.getLastMachinePartCollected()) == true) {
+		else if (getMachinePart().isNext(player.getLastMachinePartCollected() )) {
 			return machinePart;
+			
 		} else {
 			return null;
 		}
+		
 	}
 	
 	@Override

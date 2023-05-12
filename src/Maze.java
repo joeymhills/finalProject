@@ -5,7 +5,8 @@ import javafx.stage.Stage;
 
 public class Maze extends Application {
 	
-	private Game game;
+	private Game game1;
+	private Game game2;
 	
 	private Label player1Label; 
 	private Label player2Label; 
@@ -39,6 +40,8 @@ public class Maze extends Application {
 	@Override
 	public void start(Stage stage) {
 		
+		game1 = new Game(1);
+	    game2 = new Game(2);
 		/**
 		 * will be the main grid that will contain 
 		 * the GUI for player1 and player 2
@@ -99,7 +102,6 @@ public class Maze extends Application {
 		grid.add(reset, 3, 7);
 		
 		
-		game = new Game();
 		
 		
 		/**
@@ -111,7 +113,8 @@ public class Maze extends Application {
 			public void handle(ActionEvent event) {
 				
 			try {
-				game.reset();
+				game1.reset();
+				game2.reset();
 				p1TextField.setText("Game has been reset.");
 				p2TextField.setText("Game has been reset.");
 			} catch (Exception e) {
@@ -128,7 +131,7 @@ public class Maze extends Application {
 		p1ReqHelp.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override
 		    public void handle(ActionEvent event) {
-		      String str = game.getCurrentPlayer().getCurrentRoom().helpMessage();
+		      String str = game1.getCurrentPlayer().getCurrentRoom().helpMessage();
 		      p1TextField.setText(str);
 		      
 		    }
@@ -136,7 +139,7 @@ public class Maze extends Application {
 		p2ReqHelp.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override
 		    public void handle(ActionEvent event) {
-		      String str = game.getCurrentPlayer().getCurrentRoom().helpMessage(); 
+		      String str = game2.getCurrentPlayer().getCurrentRoom().helpMessage(); 
 		      p2TextField.setText(str);
 		      
 		    }
@@ -148,14 +151,14 @@ public class Maze extends Application {
 		p1up.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				p1TextField.setText(game.getCurrentPlayer().move(Direction.up));
+				p1TextField.setText(game1.getCurrentPlayer().move(Direction.up));
 			}
 		});
 		
 		p2up.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				p2TextField.setText(game.getCurrentPlayer().move(Direction.up));
+				p2TextField.setText(game2.getCurrentPlayer().move(Direction.up));
 			}
 		});
 		
@@ -165,14 +168,14 @@ public class Maze extends Application {
 		p1right.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				p1TextField.setText(game.getCurrentPlayer().move(Direction.right));
+				p1TextField.setText(game1.getCurrentPlayer().move(Direction.right));
 			}
 		});
 		
 		p2right.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				p2TextField.setText(game.getCurrentPlayer().move(Direction.right));
+				p2TextField.setText(game2.getCurrentPlayer().move(Direction.right));
 			}
 		});
 		
@@ -182,13 +185,13 @@ public class Maze extends Application {
 		p1down.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				p1TextField.setText(game.getCurrentPlayer().move(Direction.down));
+				p1TextField.setText(game1.getCurrentPlayer().move(Direction.down));
 			}
 		});
 		p2down.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				p2TextField.setText(game.getCurrentPlayer().move(Direction.down));
+				p2TextField.setText(game2.getCurrentPlayer().move(Direction.down));
 			}
 		});
 		
@@ -198,13 +201,13 @@ public class Maze extends Application {
 		p1left.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				p1TextField.setText(game.getCurrentPlayer().move(Direction.left));
+				p1TextField.setText(game1.getCurrentPlayer().move(Direction.left));
 			}
 		});
 		p2left.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				p2TextField.setText(game.getCurrentPlayer().move(Direction.left));
+				p2TextField.setText(game2.getCurrentPlayer().move(Direction.left));
 			}
 		});
 		
@@ -215,28 +218,27 @@ public class Maze extends Application {
 		p1CollectPart.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				String methodCallandMessage = game.getCurrentPlayer().collectPart();
-				p1TextField.setText(methodCallandMessage);
+				
+				p1TextField.setText(game1.getCurrentPlayer().collectPart());
 			}
 		});
 		p2CollectPart.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				String methodCallandMessage = game.getCurrentPlayer().collectPart();
-				p2TextField.setText(methodCallandMessage);
+				p2TextField.setText(game2.getCurrentPlayer().collectPart());
 			}
 		});
 		
 		p1CollectTools.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				p1TextField.setText(game.getCurrentPlayer().collectTools());
+				p1TextField.setText(game1.getCurrentPlayer().collectTools());
 			}
 		});
 		p2CollectTools.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				p2TextField.setText(game.getCurrentPlayer().collectTools());
+				p2TextField.setText(game2.getCurrentPlayer().collectTools());
 			}
 		});
 		
@@ -244,10 +246,15 @@ public class Maze extends Application {
 		p1BuildMachine.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				
+				p1TextField.setText(game1.getCurrentPlayer().build());
 			}
 		});
-		
+		p2BuildMachine.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				p2TextField.setText(game2.getCurrentPlayer().build());
+			}
+		});
 		
 		
 		stage.setScene(scene);    // Set window's scene  
@@ -256,8 +263,6 @@ public class Maze extends Application {
 	}
 	
 	public static void main(String [] args) throws Exception {
-	    Game game = new Game();
-	    game.InitGame();
 		launch(args); // Launch application
 	}
 

@@ -1,3 +1,4 @@
+
 /*
  * Represents a player in the game
  * */
@@ -13,16 +14,26 @@
 		this.setPlayerNumber(playerNumber);
 		this.currentRoom = startingRoom;
 		this.toolsCollected = false;
+		this.lastMachinePartCollected = new Part(0);
 	}
 	
+	/*
+	 * returns the last part 
+	 */
 	public Part getLastMachinePartCollected() {
 		return lastMachinePartCollected;
 	}
 	
+	/*
+	 * returns the current room
+	 */
 	public Room getCurrentRoom() {
 		return currentRoom;
 	}
 	
+	/*
+	 * returns true if tools have been collected
+	 */
 	public boolean hasTools() {
 		return toolsCollected;
 	}
@@ -36,14 +47,14 @@
 	 * @author mustafabolat
 	 */
 	public String move (int direction) {
-		if (currentRoom.getDoor(direction) == null){
+		if (currentRoom.getDoor(direction) == null) {
 			return "There is no door in this direction";
-		} else  {
+		} else {
 			Room newRoom = currentRoom.getDoor(direction);
 			currentRoom = newRoom;
 			return currentRoom.printMessage();
 		}
-		
+			
 	}
 	
 	/**
@@ -56,30 +67,50 @@
 			return "This room does not have tools to collect";
 		else if (toolsCollected == true ) {
 			return "You have already collected the tools";
-		} else {
+		}else {
 		toolsCollected = true;
 		return "Tools are now collected";
 		}
 	}
 	
+	/*
+	 * if the the part is consecutive and the room has 
+	 * a part it assigns the new part to the player
+	 */
 	public String collectPart() {
-		if (currentRoom.hasPart() == true && currentRoom.collectPart(this) != null) {
-			lastMachinePartCollected = currentRoom.collectPart(this);
-			return "Successfuly got the part";
+		if (currentRoom.hasPart() == true) {
+			
+			lastMachinePartCollected = getCurrentRoom().collectPart(this);
+			return "Part number " + lastMachinePartCollected.getPartNumber() + " has been collected";
+			
 		} else {
-			return "This room doesnt have a part";
+			return "the room does not have a part";
 		}
+		
+		
 	}
 	
-	//needs finishing
-	public String build () {
-		return "";
+	/*
+	 * if everything is collected, and in the workshop, then the game finishes.
+	 */
+	public String build() {
+		if (lastMachinePartCollected.isLastPart() == true && toolsCollected == true && currentRoom.isWorkshop() == true) {
+			return "Congrats on finishing the game!";
+		} else {
+			return "You need to collect all the parts and tools";
+		}
 	}
 
+	/*
+	 *returns the player number 
+	 */
 	public int getPlayerNumber() {
 		return playerNumber;
 	}
-
+	
+	/*
+	 * sets the player number
+	 */
 	public void setPlayerNumber(int playerNumber) {
 		this.playerNumber = playerNumber;
 	}

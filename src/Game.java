@@ -1,22 +1,22 @@
 /**
  * This class holds the whole game and its components (the two players and 10 rooms). 
  * This class should be instantiated in the main application class 
- * @author ADD YOUR NAME
+ * @author Mustafa Bolat
  */
 
 /*
  * Game Object must be instantiated in the main application class*/
 
  public class Game {
-	private Player[] players;  //should hold two player objects
+	//private Player player;  //should hold two player objects
 	private Room[] rooms; 	// should hold 10 room objects 
 	private Player currentPlayer;
 
 	
-	public Game() { //Exception for setUpDoors();
+	public Game(int playerNum) { 
 		
-		players = new Player[1];
-		rooms = new Room[ ]{
+		
+		rooms = new Room[]{
 				
 				new Room(1), 
 				new RoomWithMachinePart(2, new Part(3)),
@@ -37,39 +37,36 @@
 			e.printStackTrace();
 			System.err.println("Error in Game>Game()>setupdoors()");
 		}
-		InitGame();
+	//	InitGame();
+		
+		this.currentPlayer = new Player(playerNum, rooms[0]);
 		
 		}
 	
 	
-	public void InitGame() {
+	//public void InitGame() {
 		
-		Player player1 = new Player(1, rooms[0]);
-		Player player2 = new Player(2, rooms[0]);
 		
-		Player[] players = {
-				player1, player2
-				};
+	//	Player player2 = new Player(2, rooms[0]);
 		
-		currentPlayer = players[0];
 		
-		}
+	//	}
 	
 	public Player getCurrentPlayer() {
 		return currentPlayer;
 	}
 	
-	public void switchPlayer() {
-		if (currentPlayer == players[0]) {
-			currentPlayer = players[1];
-		} else {
-			currentPlayer = players[0];
-		}
-	}
+	//public void switchPlayer() {
+	//	if (currentPlayer == player[0]) {
+	//		currentPlayer = player[1];
+	//	} else {
+	//		currentPlayer = player[0];
+	//	}
+	//}
 	
 	public void reset() throws Exception {
 		
-		players = new Player[1];
+		
 		rooms = new Room[ ]{
 				
 				new Room(1), 

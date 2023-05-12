@@ -8,7 +8,7 @@
  public class Part {
 	
 	private int partnumber; //self explanatory
-	public static final int LAST_PART = 6; //^ again 
+	public static final int LAST_PART = 4; //^ again 
 	
 	
 	public Part(int number ) {
@@ -31,7 +31,7 @@
 	 * @return boolean True if last part, false if not last part
 	 */
 	public boolean isLastPart() {
-		if (LAST_PART == partnumber) {
+		if (partnumber == LAST_PART) {
 			return true;
 		} else {
 			return false;
@@ -46,7 +46,7 @@
 	 * 
 	 */
 	public boolean isNext(Part part) {
-		if (this.partnumber + 1 == part.partnumber ) {
+		if (getPartNumber() == (part.getPartNumber() + 1) ) {
 			return true;
 		} else {
 			return false;
