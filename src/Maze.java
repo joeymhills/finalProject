@@ -1,8 +1,15 @@
+
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+/**
+ * This is the main class to the game. All handlers and GUI goes in this bad boy.
+ * written by yours truly
+ * @author Mustafa
+ */
 public class Maze extends Application {
 	
 	private Game game1;
@@ -36,16 +43,17 @@ public class Maze extends Application {
 	
 	private Button reset;
 	
-	
+	/**
+	 * Creates the game objects and sets grid and handlers
+	 * 
+	 * @author Mustafa
+	 */
 	@Override
 	public void start(Stage stage) {
 		
 		game1 = new Game(1);
 	    game2 = new Game(2);
-		/**
-		 * will be the main grid that will contain 
-		 * the GUI for player1 and player 2
-		 */
+		
 		
 		Scene scene = null;         
 	    GridPane grid = null;   
@@ -113,8 +121,7 @@ public class Maze extends Application {
 			public void handle(ActionEvent event) {
 				
 			try {
-				game1.reset();
-				game2.reset();
+				main(null);
 				p1TextField.setText("Game has been reset.");
 				p2TextField.setText("Game has been reset.");
 			} catch (Exception e) {
@@ -145,7 +152,7 @@ public class Maze extends Application {
 		    }
 		});
 		
-		/*
+		/**
 		 * UP button handlers
 		 */
 		p1up.setOnAction(new EventHandler<ActionEvent>() {
@@ -162,7 +169,7 @@ public class Maze extends Application {
 			}
 		});
 		
-		/*
+		/**
 		 * RIGHT button handlers
 		 */
 		p1right.setOnAction(new EventHandler<ActionEvent>() {
@@ -179,7 +186,7 @@ public class Maze extends Application {
 			}
 		});
 		
-		/*
+		/**
 		 * Down Button Handlers 
 		 */
 		p1down.setOnAction(new EventHandler<ActionEvent>() {
@@ -195,7 +202,7 @@ public class Maze extends Application {
 			}
 		});
 		
-		/*
+		/**
 		 * Left button Handlers
 		 */
 		p1left.setOnAction(new EventHandler<ActionEvent>() {
@@ -211,8 +218,8 @@ public class Maze extends Application {
 			}
 		});
 		
-		/*
-		 * Handlers for collect tools/machine part/build machine
+		/**
+		 * Handlers for collect part
 		 */
 		
 		p1CollectPart.setOnAction(new EventHandler<ActionEvent>() {
@@ -229,6 +236,9 @@ public class Maze extends Application {
 			}
 		});
 		
+		/**
+		 * handlers for collect tools
+		 */
 		p1CollectTools.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -242,7 +252,9 @@ public class Maze extends Application {
 			}
 		});
 		
-		
+		/**
+		 * handlers for 'build machine'
+		 */
 		p1BuildMachine.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -262,8 +274,18 @@ public class Maze extends Application {
 	    stage.show();             // Display window
 	}
 	
+	
+	
+	
+	
+	/**
+	 * main launches the javafx program 
+	 * 
+	 * @throws Exception
+	 */
 	public static void main(String [] args) throws Exception {
 		launch(args); // Launch application
+		
 	}
 
 	

@@ -112,7 +112,12 @@ public class Room {
 }
 
 
-
+/**
+ * Extends Room class, represents a room with a collectible part.
+ * holds an extra Part object to be collected by the player.
+ * Has extra methods to collect Part and get/set Part
+ * @author Mustafa
+ */
 class RoomWithMachinePart extends Room {
 
 	private Part machinePart;
@@ -123,11 +128,16 @@ class RoomWithMachinePart extends Room {
 		this.machinePart = part;
 	}
 	
-	
+	/**
+	 * returns the Room's part
+	 */
 	public Part getMachinePart() {
 		return machinePart;
 	}
 	
+	/**
+	 * Returns the Part object if the Player Object has the part before it
+	 */
 	@Override
 	public Part collectPart(Player player) {
 		if (player.getLastMachinePartCollected() == null) {
@@ -142,27 +152,41 @@ class RoomWithMachinePart extends Room {
 		
 	}
 	
+	/**
+	 * returns true for having a part
+	 */
 	@Override
 	public boolean hasPart () {
 		return true;
 	}
 	
+	/**
+	 * Help message for the player, returns the room number using method.
+	 */
  @Override
 	public String helpMessage() {
-		return "you are in room ";
-		
+		return "you are in room " + this.getNumber();
 	}
 	
 }
 
 
-
+/**
+ * extends Room class, represents a room with tools.
+ * @author Mustafa
+ */
 class RoomWithTools extends Room {
-
+	
+	/*
+	 * no extra data members, uses method return instead.
+	 */
 	public RoomWithTools(int number) {
 		super(number);
 	}
 	
+	/*
+	 * always returns true if called on RoomWithTools Class
+	 */
 	@Override
 	public boolean hasTools () {
 		return true;
@@ -170,8 +194,11 @@ class RoomWithTools extends Room {
 	
 }
 
-
-
+/**
+ * Extends Room class and represents a workshop.
+ * no extra data, just uses method returns.
+ * @author Mustafa
+ */
 class Workshop extends Room {
 
 	public Workshop(int number) {

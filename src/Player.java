@@ -80,8 +80,16 @@
 	public String collectPart() {
 		if (currentRoom.hasPart() == true) {
 			
-			lastMachinePartCollected = getCurrentRoom().collectPart(this);
+			if (getCurrentRoom().collectPart(this) == null) {
+				
+				return "Must collect parts in consecutive order";
+			
+			} else {
+			
+				lastMachinePartCollected = getCurrentRoom().collectPart(this);
 			return "Part number " + lastMachinePartCollected.getPartNumber() + " has been collected";
+			
+			}
 			
 		} else {
 			return "the room does not have a part";
@@ -94,13 +102,17 @@
 	 * if everything is collected, and in the workshop, then the game finishes.
 	 */
 	public String build() {
-		if (lastMachinePartCollected.isLastPart() == true && toolsCollected == true && currentRoom.isWorkshop() == true) {
+		
+		if (currentRoom.isWorkshop() == false) {
+			return "this is not a workshop Room!";
+		} else if (lastMachinePartCollected.isLastPart() == true && toolsCollected == true && currentRoom.isWorkshop() == true) {
 			return "Congrats on finishing the game!";
 		} else {
 			return "You need to collect all the parts and tools";
 		}
 	}
-
+	
+	
 	/*
 	 *returns the player number 
 	 */

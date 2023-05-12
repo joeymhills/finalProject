@@ -1,11 +1,13 @@
 /**
  * This class holds the whole game and its components (the two players and 10 rooms). 
  * This class should be instantiated in the main application class 
- * @author Mustafa Bolat
+ * @author Mustafa 
  */
 
-/*
- * Game Object must be instantiated in the main application class*/
+/**
+ * Game Object must be instantiated in the main application class
+ * @author Mustafa
+ * */
 
  public class Game {
 	//private Player player;  //should hold two player objects
@@ -63,6 +65,7 @@
 	//		currentPlayer = player[0];
 	//	}
 	//}
+	
 	
 	public void reset() throws Exception {
 		
